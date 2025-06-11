@@ -2,6 +2,7 @@ import random
 from faker import Faker
 
 class LinkedList:
+    # Реализация списка
     def __init__(self):
         self.head = None
 
@@ -24,6 +25,7 @@ class LinkedList:
         return result
 
 class Node:
+    # Реализация элемента списка
     def __init__(self, data):
         self.data = data
         self.next = None
@@ -34,11 +36,13 @@ class WordChain:
         for word in words:
             self.words.append(word)
 
+    # Получение последней буквы
     def last_significant_letter(self, word):
         if word[-1] == 'ь' and len(word) > 1:
             return word[-2]
         return word[-1]
 
+    # Поиск цепочки
     def find_chain(self):
         words_list = self.words.to_list()
         n = len(words_list)
@@ -76,10 +80,12 @@ class InputHandler:
     def __init__(self):
         self.fake = Faker('ru_RU')
 
+    # Ввод с консоли
     def get_words_from_console(self):
         input_str = input("Введите слова через пробел: ")
         return [w.lower() for w in input_str.split() if w]
 
+    # Ввод из файла
     def get_words_from_file(self, filename="words.txt"):
         try:
             with open(filename, 'r', encoding='utf-8') as f:
@@ -89,18 +95,20 @@ class InputHandler:
             print(f"\nОшибка: файл '{filename}' не найден.")
             return None
 
+    # Генерация
     def generate_words(self, num_words=10):
         words = []
         for _ in range(num_words):
             word = self.fake.word()
             words.append(word.lower())
-        print("\nСгенерированные слова:", ' '.join(words))  # Вывод без скобок и запятых
+        print("\nСгенерированные слова:", ' '.join(words))
         return words
 
 class Menu:
     def __init__(self):
         self.input_handler = InputHandler()
 
+    # Реализация меню
     def run(self):
         while True:
             print("\nМеню игры в слова:")
